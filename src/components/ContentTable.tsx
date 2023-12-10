@@ -6,8 +6,8 @@ export default function ContentTable({
   content: { [key: string]: any };
 }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
+    <div className="overflow-x-auto ">
+      <table className="table bg-white/5 rounded mb-4">
         {/* head */}
         <thead>
           <tr>

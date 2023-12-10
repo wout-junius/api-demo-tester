@@ -1,11 +1,17 @@
 import React from "react";
 import ContentTable from "./ContentTable";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-interface ApiCallProps {
+export interface ApiCallProps {
   title: string;
-  content: { [key: string]: string };
+  content?: { [key: string]: string };
   endpoint: string;
-  call: (endpoint: string, content: { [key: string]: string }) => void;
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  call: (
+    endpoint: string,
+    content: { [key: string]: string } | undefined
+  ) => Promise<Response>;
 }
 
 export default function ApiCall({
@@ -14,8 +20,12 @@ export default function ApiCall({
   endpoint = "/test",
   call,
 }: ApiCallProps) {
-  const onClick = () => {
-    call(endpoint, content);
+  const [response, setResponse] = React.useState<string | undefined>();
+
+  const onClick = async () => {
+    const response = await call(endpoint, content);
+    const json = await response.json();
+    setResponse(JSON.stringify(json, null, 2));
   };
 
   return (
@@ -24,12 +34,24 @@ export default function ApiCall({
       <div className="collapse-title text-xl font-medium">{title}</div>
       <div className="collapse-content">
         <div className="collapse-inner">
-          <ContentTable content={content} />
+          {content ? <ContentTable content={content} /> : null}
           <div className="flex justify-end">
             <button className="btn btn-primary" onClick={onClick}>
-              Fetch <span>{endpoint}</span>
+              Fetch{" "}
+              <i className="bg-zinc-50/20 p-2 rounded font-bold">{endpoint}</i>
             </button>
           </div>
+          {response ? (
+            <div className="w-full">
+              <h1 className=" text-2xl font-bold">Response:</h1>
+              <SyntaxHighlighter
+                className="language-json rounded m-10 max-w-full overflow-hidden"
+                style={dracula}
+              >
+                {response}
+              </SyntaxHighlighter>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
