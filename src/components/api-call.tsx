@@ -8,10 +8,7 @@ export interface ApiCallProps {
   content?: { [key: string]: string };
   endpoint: string;
   method: "GET" | "POST" | "PUT" | "DELETE";
-  call: (
-    endpoint: string,
-    content: { [key: string]: string } | undefined
-  ) => Promise<Response>;
+  call: () => Promise<Response>;
 }
 
 export default function ApiCall({
@@ -19,11 +16,12 @@ export default function ApiCall({
   content,
   endpoint = "/test",
   call,
+  method,
 }: ApiCallProps) {
   const [response, setResponse] = React.useState<string | undefined>();
 
   const onClick = async () => {
-    const response = await call(endpoint, content);
+    const response = await call();
     const json = await response.json();
     setResponse(JSON.stringify(json, null, 2));
   };
@@ -31,7 +29,14 @@ export default function ApiCall({
   return (
     <div className="collapse collapse-plus bg-base-200 m-4">
       <input type="radio" name="my-accordion-3" />
-      <div className="collapse-title text-xl font-medium">{title}</div>
+      <div className="collapse-title text-xl font-medium">
+        <span
+          className={`badge badge-outline badge-lg mr-1 ${methodColors[method]}`}
+        >
+          {method}
+        </span>
+        {title}
+      </div>
       <div className="collapse-content">
         <div className="collapse-inner">
           {content ? <ContentTable content={content} /> : null}
@@ -57,3 +62,10 @@ export default function ApiCall({
     </div>
   );
 }
+
+const methodColors = {
+  GET: "badge-success",
+  POST: "badge-warning",
+  PUT: "badge-primary",
+  DELETE: "badge-error",
+};

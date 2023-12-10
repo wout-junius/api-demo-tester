@@ -13,6 +13,26 @@ export const apiCalls : Without<ApiCallProps, 'call'>[] = [
         },
     },
     {
+        title: 'Get all Communities',
+        endpoint: '/communities',
+        method: "GET",
+    },
+    {
+        title: 'Get a Community',
+        endpoint: '/communities/:id',
+        method: "GET",
+    },
+    {
+        title: 'Update a Community',
+        endpoint: '/communities/:id',
+        method: "PUT",
+        content: {
+            name: 'The Belgian JavaScript Community',
+            description: 'Also known as BeJS',
+            website: 'https://bejs.io',
+        },
+    },
+    {
         title: 'Delete a Community',
         endpoint: '/communities/:id',
         method: "DELETE",
