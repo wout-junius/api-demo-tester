@@ -21,6 +21,7 @@ export default function ApiCall({
   const [response, setResponse] = React.useState<string | undefined>();
 
   const onClick = async () => {
+    setResponse(undefined);
     const response = await call();
     const json = await response.json();
     setResponse(JSON.stringify(json, null, 2));

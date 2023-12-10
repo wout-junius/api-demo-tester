@@ -3,38 +3,38 @@ type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export const apiCalls : Without<ApiCallProps, 'call'>[] = [
     {
-        title: 'Create a Community',
-        endpoint: '/communities',
+        title: 'Create a Meetup',
+        endpoint: '/meetup',
         method: "POST",
         content: {
-            name: 'BeJS',
-            description: 'The Belgian JavaScript Community',
-            website: 'https://bejs.io',
+            title: 'NestJs Meetup',
+            description: 'NestJS demystified: what is it, how does it work, and how you can use it to build your next API.',
+            speaker: 'Wout Junius',
         },
     },
     {
-        title: 'Get all Communities',
-        endpoint: '/communities',
+        title: 'Get all Meetups',
+        endpoint: '/meetup',
         method: "GET",
     },
     {
-        title: 'Get a Community',
-        endpoint: '/communities/:id',
+        title: 'Get a Meetup',
+        endpoint: '/meetup/:id',
         method: "GET",
     },
     {
-        title: 'Update a Community',
-        endpoint: '/communities/:id',
+        title: 'Update a Meetup',
+        endpoint: '/meetup/:id',
         method: "PUT",
         content: {
-            name: 'The Belgian JavaScript Community',
-            description: 'Also known as BeJS',
-            website: 'https://bejs.io',
+            title: 'NestJS demystified',
+            description: 'What is it, how does it work, and how you can use it to build your next API.',
+            speaker: 'Wout Junius',
         },
     },
     {
-        title: 'Delete a Community',
-        endpoint: '/communities/:id',
+        title: 'Delete a Meetup',
+        endpoint: '/meetup/:id',
         method: "DELETE",
     }
 ];

@@ -14,7 +14,7 @@ function App() {
             endpoint={call.endpoint}
             content={call.content}
             call={() => {
-              return fetch(`http://localhost:3000${call.endpoint}`, {
+              return fetch(`api${call.endpoint}`, {
                 method: call.method,
                 headers: {
                   "Content-Type": "application/json",
