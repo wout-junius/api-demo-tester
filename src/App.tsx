@@ -30,13 +30,16 @@ function App() {
             endpoint={call.endpoint}
             content={call.content}
             call={() => {
-              return fetch(`api${call.endpoint}`.replace(":id", meetupId), {
-                method: call.method,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(call.content),
-              });
+              return fetch(
+                `127.0.0.1/api${call.endpoint}`.replace(":id", meetupId),
+                {
+                  method: call.method,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(call.content),
+                }
+              );
             }}
             method={call.method}
           />
