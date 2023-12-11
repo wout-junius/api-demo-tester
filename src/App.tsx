@@ -31,7 +31,7 @@ function App() {
             content={call.content}
             call={() => {
               return fetch(
-                `127.0.0.1/api${call.endpoint}`.replace(":id", meetupId),
+                `http://127.0.0.1/api${call.endpoint}`.replace(":id", meetupId),
                 {
                   method: call.method,
                   headers: {
