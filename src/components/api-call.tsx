@@ -7,7 +7,7 @@ export interface ApiCallProps {
   title: string;
   content?: { [key: string]: string };
   endpoint: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   call: () => Promise<Response>;
 }
 
@@ -69,4 +69,5 @@ const methodColors = {
   POST: "badge-warning",
   PUT: "badge-primary",
   DELETE: "badge-error",
+  PATCH: "badge-accent",
 };

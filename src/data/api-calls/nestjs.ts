@@ -25,7 +25,7 @@ export const apiCalls : Without<ApiCallProps, 'call'>[] = [
     {
         title: 'Update a Meetup',
         endpoint: '/meetup/:id',
-        method: "PUT",
+        method: "PATCH",
         content: {
             title: 'NestJS demystified',
             description: 'What is it, how does it work, and how you can use it to build your next API.',
